@@ -19,6 +19,9 @@ function CharacterCard() {
     sex,
     title,
     unlocked_titles,
+    vocation,
+    level,
+    achievement_points,
     world,
     residence,
     married_to,
@@ -30,10 +33,13 @@ function CharacterCard() {
 
   return (
     <div>
-      <h1>{name}'s Card</h1>
+      <h1>Name: {name}</h1>
       <p>Sex: {sex}</p>
       <p>Title: {title}</p>
       <p>Unlocked Titles: {unlocked_titles}</p>
+      <p>Vocation: {vocation}</p>
+      <p>Level: {level}</p>
+      <p>Achievement Points: {achievement_points}</p>
       <p>World: {world}</p>
       <p>Residence: {residence}</p>
       <p>Married To: {married_to}</p>
@@ -53,7 +59,7 @@ function CharacterCard() {
         {character.achievements &&
           character.achievements.map((achievement, index) => (
             <li key={index}>
-              {achievement.name} - Grade: {achievement.grade} - Secret: {achievement.secret.toString()}
+              {achievement.name}
             </li>
           ))}
       </ul>

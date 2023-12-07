@@ -1,13 +1,13 @@
 import './App.css';
 import React from 'react';
 import {Routes, Route} from 'react-router-dom';
-import CharacterCard from './components/CharacterCard';
+import Characters from './pages/Characters';
 
 function App() {
   return (
     <section>
       <Routes>
-        <Route path="/" element={<CharacterCard />} />
+        <Route path="/" element={<Characters />} />
       </Routes>
     </section>
   );

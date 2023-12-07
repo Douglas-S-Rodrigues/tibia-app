@@ -4,10 +4,11 @@ import { getCharacter } from '../services/axiosApi';
 
 function AppProvider({ children }) {
   const [character, setCharacter] = useState({});
+  const [search, setSearch] = useState('');
 
-  const fetchCharacter = async () => {
+  const fetchCharacter = async (name) => {
     try {
-      const response = await getCharacter();
+      const response = await getCharacter(name);
       setCharacter(response.character);
     } catch (error) {
       console.error('Erro ao obter dados do personagem:', error);
@@ -18,8 +19,10 @@ function AppProvider({ children }) {
     () => ({
       character,
       fetchCharacter,
+      search,
+      setSearch,
     }),
-    [character]
+    [character, search]
   );
 
   return <MyContext.Provider value={contextValue}>{children}</MyContext.Provider>;

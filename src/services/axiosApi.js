@@ -17,3 +17,13 @@ export const getCharacter = async (name) => {
     throw error;
   }
 };
+
+export const getTibiaHighscores = async (world, category, vocation, page) => {
+  try {
+    const apiResponse = await axiosApi.get(`/highscores/${world}/${category}/${vocation}/${page}`);
+    return apiResponse.data;
+  } catch (error) {
+    console.error('Erro ao obter dados da tabela classificatória:', error);
+    throw error;
+  }
+};

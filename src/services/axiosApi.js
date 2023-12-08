@@ -7,9 +7,13 @@ const axiosApi = axios.create({
 export const getCharacter = async (name) => {
   try {
     const apiResponse = await axiosApi.get(`/character/${name}`);
-    return apiResponse.data; 
+    return apiResponse.data;
   } catch (error) {
-    console.error('Nome não encontrado', error);
+    if (error.response && error.response.status === 400) {
+      console.error('Erro 400: Requisição inválida. Verifique os parâmetros.');
+    } else {
+      console.error('Erro ao obter dados do personagem:', error);
+    }
     throw error;
   }
 };

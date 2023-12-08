@@ -1,17 +1,32 @@
-import React, { useContext, useEffect } from "react";
-import MyContext from "../context/MyContext";
+import React, { useContext, useEffect } from 'react';
+import MyContext from '../context/MyContext';
 
 function CharacterCard() {
-  const { character, fetchCharacter } = useContext(MyContext);
+  const { character, result, search, setResult, fetchCharacter } = useContext(MyContext);
+
+  const fetchData = async () => {
+    if (result && search.trim() !== '') {
+      try {
+        await fetchCharacter(search);
+        setResult(true);
+      } catch (error) {
+        console.error('Erro ao obter dados do personagem:', error);
+        setResult(false);
+      }
+    }
+  };
 
   useEffect(() => {
-    fetchCharacter();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [result]);
 
-  
+  if (search.trim() === '' || !result) {
+    return null;
+  }
+
   if (!character || !character.character) {
-    return <div>Loading...</div>; 
+    return 'Character not found.';
   }
 
   const {
@@ -58,9 +73,7 @@ function CharacterCard() {
       <ul>
         {character.achievements &&
           character.achievements.map((achievement, index) => (
-            <li key={index}>
-              {achievement.name}
-            </li>
+            <li key={index}>{achievement.name}</li>
           ))}
       </ul>
 

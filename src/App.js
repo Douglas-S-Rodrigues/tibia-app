@@ -3,6 +3,7 @@ import React from 'react';
 import {Routes, Route} from 'react-router-dom';
 import Characters from './pages/Characters';
 
+
 function App() {
   return (
     <section>

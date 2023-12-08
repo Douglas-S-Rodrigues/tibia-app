@@ -2,11 +2,7 @@ import React, { useContext } from 'react';
 import MyContext from '../context/MyContext';
 
 function SearchBar() {
-  const { search, setSearch, fetchCharacter } = useContext(MyContext);
-
-  const searchCharacter = () => {
-    fetchCharacter(search);
-  };
+  const { search, setSearch } = useContext(MyContext);
 
   return (
     <div className="search-bar">
@@ -16,9 +12,6 @@ function SearchBar() {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
-      <button type="submit" onClick={searchCharacter}>
-        Search
-      </button>
     </div>
   );
 }

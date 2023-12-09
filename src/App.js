@@ -6,12 +6,16 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Highscores from './pages/Highscores';
 import Home from './pages/Home';
+import BoostedBossCard from './components/BoostedBossCard';
+import BoostedCreatureCard from './components/BosstedCreatureCard';
 
 
 function App() {
   return (
     <section>
       <Header />
+      <BoostedCreatureCard />
+      <BoostedBossCard />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/characters" element={<Characters />} />

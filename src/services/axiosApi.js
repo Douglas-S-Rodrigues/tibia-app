@@ -37,3 +37,23 @@ export const getLatestNews = async () => {
     throw error;
   }
 };
+
+export const getBoostableBosses = async () => {
+  try {
+    const apiResponse = await axiosApi.get('/boostablebosses');
+    return apiResponse.data;
+  } catch (error) {
+    console.error('Erro ao obter informações dos bosses:', error);
+    throw error;
+  }
+};
+
+export const getCreatures = async () => {
+  try {
+    const apiResponse = await axiosApi.get('/creatures');
+    return apiResponse.data;
+  } catch (error) {
+    console.error('Erro ao obter informações sobre criaturas:', error);
+    throw error;
+  }
+};

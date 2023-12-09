@@ -1,24 +1,24 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import MyContext from './MyContext';
-import { getCharacter, getTibiaHighscores } from '../services/axiosApi';
-
+import { getCharacter, getTibiaHighscores, getLatestNews } from '../services/axiosApi';
 
 function AppProvider({ children }) {
   const [character, setCharacter] = useState({});
   const [search, setSearch] = useState('');
   const [result, setResult] = useState(true);
+  const [news, setNews] = useState([]);
 
   const [filter, setFilter] = useState({
     world: 'all',
     category: 'experience',
     vocation: 'all'
-
   });
 
   const [highscores, setHighscores] = useState({
     category: '',
     highscore_list: []
   });
+
 
   const fetchCharacter = async (name) => {
     try {
@@ -43,8 +43,19 @@ function AppProvider({ children }) {
     }
   };
 
+  const fetchNews = async () => {
+    try {
+      const response = await getLatestNews();
+      setNews(response.news);
+    } catch (error) {
+      console.error('Erro ao obter as últimas notícias:', error);
+      setNews([]);
+    }
+  };
+
   useEffect(() => {
     fetchHighscores();
+    fetchNews();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filter]);
 
@@ -62,9 +73,10 @@ function AppProvider({ children }) {
       setFilter,
       highscores,
       vocations,
+      news,
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [character, search, result, filter, highscores]
+    [character, search, result, filter, highscores, news]
   );
 
   return <MyContext.Provider value={contextValue}>{children}</MyContext.Provider>;

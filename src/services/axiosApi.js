@@ -27,3 +27,13 @@ export const getTibiaHighscores = async (world, category, vocation, page) => {
     throw error;
   }
 };
+
+export const getLatestNews = async () => {
+  try {
+    const apiResponse = await axiosApi.get('/news/latest');
+    return apiResponse.data;
+  } catch (error) {
+    console.error('Erro ao obter as últimas notícias:', error);
+    throw error;
+  }
+};
